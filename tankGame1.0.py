@@ -6,7 +6,8 @@ class MainGame:
     @classmethod
     def display(cls):
         pygame.init()
-        screen = pygame.display.set_mode((400, 300))
+        pygame.display.set_mode((400, 300))
+        pygame.display.set_caption("Tank Game 1.0")
         done = False
 
         while not done:
