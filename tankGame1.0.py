@@ -2,11 +2,14 @@ import pygame
 
 
 class MainGame:
+    screen_width = 700
+    screen_height = 550
 
     @classmethod
     def display(cls):
         pygame.init()
-        screen = pygame.display.set_mode((400, 300))
+        pygame.display.set_mode((cls.screen_width, cls.screen_height))
+        pygame.display.set_caption("Tank Game V1.0")
         done = False
 
         while not done:
