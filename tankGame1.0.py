@@ -1,19 +1,20 @@
 import pygame
 
-pygame.init()
-screen = pygame.display.set_mode((400, 300))
-done = False
-
-while not done:
-    for event in pygame.event.get():
-        if event.type == pygame.QUIT:
-            done = True
-
-    pygame.display.flip()
-
 
 class MainGame:
-    pass
+
+    @classmethod
+    def display(cls):
+        pygame.init()
+        screen = pygame.display.set_mode((400, 300))
+        done = False
+
+        while not done:
+            for event in pygame.event.get():
+                if event.type == pygame.QUIT:
+                    done = True
+
+            pygame.display.flip()
 
 
 class Tank:
@@ -38,3 +39,6 @@ class Explosion:
 
 class SoundEffect:
     pass
+
+
+MainGame.display()
