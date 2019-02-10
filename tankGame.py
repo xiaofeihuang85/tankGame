@@ -9,7 +9,7 @@ class MainGame:
     def display(cls):
         pygame.init()
         pygame.display.set_mode((cls.screen_width, cls.screen_height))
-        pygame.display.set_caption("Tank Game V1.0")
+        pygame.display.set_caption("Tank Game V2.0")
         done = False
 
         while not done:
@@ -28,7 +28,10 @@ class MainGame:
                         print("You pressed LEFT arrow key!")
                     if event.key == pygame.K_RIGHT:
                         print("You pressed RIGHT arrow key!")
-
+            pygame.font.init()
+            pygame.display.get_surface().blit(
+                pygame.font.SysFont("arial", 16).render("The amount of the enemy tanks: ", False, [255, 0, 0]),
+                (0, 0))
             pygame.display.flip()
 
 
