@@ -16,6 +16,18 @@ class MainGame:
             for event in pygame.event.get():
                 if event.type == pygame.QUIT:
                     done = True
+                if event.type == pygame.KEYUP:
+                    print("You released a key!")
+                if event.type == pygame.KEYDOWN:
+                    print("You pressed a key!")
+                    if event.key == pygame.K_UP:
+                        print("You pressed UP arrow key!")
+                    if event.key == pygame.K_DOWN:
+                        print("You pressed DOWN arrow key!")
+                    if event.key == pygame.K_LEFT:
+                        print("You pressed LEFT arrow key!")
+                    if event.key == pygame.K_RIGHT:
+                        print("You pressed RIGHT arrow key!")
 
             pygame.display.flip()
 
