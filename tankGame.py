@@ -1,17 +1,15 @@
 import pygame
 
 
-class MainGame:
+class MainScreen:
     screen_width = 700
     screen_height = 550
 
     @classmethod
     def display(cls):
         pygame.init()
-        pygame.display.set_mode((cls.screen_width, cls.screen_height))
-        pygame.display.set_caption("Tank Game V2.0")
         done = False
-        myTank = MyTank("up", (50, 50))
+        my_tank = MyTank("up", (50, 50))
 
         while not done:
             for event in pygame.event.get():
@@ -21,19 +19,15 @@ class MainGame:
                     print("You released a key!")
                 if event.type == pygame.KEYDOWN:
                     print("You pressed a key!")
-                    if event.key == pygame.K_UP:
-                        print("You pressed UP arrow key!")
-                    if event.key == pygame.K_DOWN:
-                        print("You pressed DOWN arrow key!")
-                    if event.key == pygame.K_LEFT:
-                        print("You pressed LEFT arrow key!")
-                    if event.key == pygame.K_RIGHT:
-                        print("You pressed RIGHT arrow key!")
+                    my_tank.move(event.key, (cls.screen_width, cls.screen_height))
+            pygame.display.init()
+            pygame.display.set_mode((cls.screen_width, cls.screen_height))
+            pygame.display.set_caption("Tank Game V2.0")
             pygame.font.init()
             pygame.display.get_surface().blit(
-                pygame.font.SysFont("arial", 16).render("The amount of the enemy tanks: ", False, [255, 0, 0]),
+                pygame.font.SysFont("arial", 16, True).render("The amount of the enemy tanks: ", False, [255, 0, 0]),
                 (0, 0))
-            pygame.display.get_surface().blit(myTank.image, myTank.position)
+            pygame.display.get_surface().blit(my_tank.image, my_tank.position)
             pygame.display.flip()
 
 
@@ -49,10 +43,38 @@ class Tank(Base):
 
 
 class MyTank(Tank):
+    speed = 5
+    images = (
+        pygame.image.load("images/tankU.gif"),
+        pygame.image.load("images/tankR.gif"),
+        pygame.image.load("images/tankD.gif"),
+        pygame.image.load("images/tankL.gif"))
+
     def __init__(self, direction, position):
         self.direction = direction
         self.position = position
-        self.image = pygame.image.load("images/tankU.gif")
+        self.image = MyTank.images[0]
+
+    def move(self, key, screen_size):
+        if key == pygame.K_UP:
+            print("You pressed UP arrow key!")
+            self.image = MyTank.images[0]
+            self.position = (
+                self.position[0], self.position[1] - 5 if self.position[1] - 5 >= 0 else 0)
+        elif key == pygame.K_DOWN:
+            print("You pressed DOWN arrow key!")
+            self.image = MyTank.images[2]
+            self.position = (
+                self.position[0], self.position[1] + 5 if self.position[1] + 5 <= screen_size[1] else screen_size[1])
+        elif key == pygame.K_LEFT:
+            print("You pressed LEFT arrow key!")
+            self.image = MyTank.images[3]
+            self.position = (self.position[0] - 5 if self.position[0] - 5 >= 0 else 0, self.position[1])
+        elif key == pygame.K_RIGHT:
+            print("You pressed RIGHT arrow key!")
+            self.image = MyTank.images[1]
+            self.position = (
+                self.position[0] + 5 if self.position[0] + 5 <= screen_size[0] else screen_size[0], self.position[1])
 
 
 class EnemyTank(Tank):
@@ -71,4 +93,4 @@ class SoundEffect:
     pass
 
 
-MainGame.display()
+MainScreen.display()
