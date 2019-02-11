@@ -43,7 +43,9 @@ class Tank(Base):
 
 
 class MyTank(Tank):
-    speed = 5
+    speed = 20
+    width = 35
+    height = 34
     images = (
         pygame.image.load("images/tankU.gif"),
         pygame.image.load("images/tankR.gif"),
@@ -60,21 +62,27 @@ class MyTank(Tank):
             print("You pressed UP arrow key!")
             self.image = MyTank.images[0]
             self.position = (
-                self.position[0], self.position[1] - 5 if self.position[1] - 5 >= 0 else 0)
+                self.position[0], self.position[1] - MyTank.speed if self.position[1] - MyTank.speed >= 0 else 0)
         elif key == pygame.K_DOWN:
             print("You pressed DOWN arrow key!")
             self.image = MyTank.images[2]
             self.position = (
-                self.position[0], self.position[1] + 5 if self.position[1] + 5 <= screen_size[1] else screen_size[1])
+                self.position[0],
+                self.position[1] + MyTank.speed if self.position[1] + MyTank.speed <= screen_size[
+                    1] - MyTank.height else screen_size[
+                                                1] - MyTank.height)
         elif key == pygame.K_LEFT:
             print("You pressed LEFT arrow key!")
             self.image = MyTank.images[3]
-            self.position = (self.position[0] - 5 if self.position[0] - 5 >= 0 else 0, self.position[1])
+            self.position = (
+                self.position[0] - MyTank.speed if self.position[0] - MyTank.speed >= 0 else 0, self.position[1])
         elif key == pygame.K_RIGHT:
             print("You pressed RIGHT arrow key!")
             self.image = MyTank.images[1]
             self.position = (
-                self.position[0] + 5 if self.position[0] + 5 <= screen_size[0] else screen_size[0], self.position[1])
+                self.position[0] + MyTank.speed if self.position[0] + MyTank.speed <= screen_size[0] - MyTank.width else
+                screen_size[
+                    0] - MyTank.width, self.position[1])
 
 
 class EnemyTank(Tank):
