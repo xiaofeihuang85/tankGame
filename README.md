@@ -6,3 +6,12 @@ V1.0
 V1.1
 3. Retrieve all the events
 4. Print a message when an event is triggered
+
+V2.0
+5. Display a text of the amount of enemy tanks
+
+V2.1
+6. Create Base parent class
+7. Complete Tank class
+8. Create my tank and display it on the main screen
+9. Give my tank the capability of moving
