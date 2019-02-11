@@ -13,3 +13,4 @@ V2.0
 V2.1
 6. Create Base parent class
 7. Complete Tank class
+8. Create my tank and display it on the main screen

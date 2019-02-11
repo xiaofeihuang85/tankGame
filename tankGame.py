@@ -11,6 +11,7 @@ class MainGame:
         pygame.display.set_mode((cls.screen_width, cls.screen_height))
         pygame.display.set_caption("Tank Game V2.0")
         done = False
+        myTank = MyTank("up", (50, 50))
 
         while not done:
             for event in pygame.event.get():
@@ -32,15 +33,26 @@ class MainGame:
             pygame.display.get_surface().blit(
                 pygame.font.SysFont("arial", 16).render("The amount of the enemy tanks: ", False, [255, 0, 0]),
                 (0, 0))
+            pygame.display.get_surface().blit(myTank.image, myTank.position)
             pygame.display.flip()
 
 
-class Tank:
-    pass
+class Base(pygame.sprite.Sprite):
+    def __init__(self):
+        pygame.sprite.Sprite.__init__(self)
+
+
+class Tank(Base):
+    def __init__(self, direction, position):
+        self.direction = direction
+        self.position = position
 
 
 class MyTank(Tank):
-    pass
+    def __init__(self, direction, position):
+        self.direction = direction
+        self.position = position
+        self.image = pygame.image.load("images/tankU.gif")
 
 
 class EnemyTank(Tank):
